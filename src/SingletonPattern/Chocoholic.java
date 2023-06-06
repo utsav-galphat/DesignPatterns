@@ -5,8 +5,8 @@ public class Chocoholic {
     private boolean empty;
     private boolean boiled;
 
-    //    private static Chocoholic ch = new Chocoholic(); //create a static instance of a class
-    private static Chocoholic ch;
+    private static Chocoholic ch = new Chocoholic(); //create a static instance of a class, this will be thread safe
+//    private static Chocoholic ch;
 
     private Chocoholic() {  //define a private constructor so that none can create new obj
         empty = true;
@@ -14,10 +14,10 @@ public class Chocoholic {
     }
 
     public static Chocoholic getInstance() { // define a method which will return the created object
-        //here we are doing lazy loading
+        /* here we are doing lazy loading
         if(ch == null){
             ch = new Chocoholic();
-        }
+        } */
         return ch;
     }
 
