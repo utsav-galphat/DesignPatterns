@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cucumber Report</title>
+</head>
+<body>
+    {% for test in tests %}
+    <h2>{{ test.name }}</h2>
+    <ul>
+        {% for element in test.elements %}
+        <li>
+            <h3>{{ element.name }}</h3>
+            <ul>
+                {% for step in element.steps %}
+                <li>{{ step.name }} - {{ step.result.status }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+</body>
+</html>
