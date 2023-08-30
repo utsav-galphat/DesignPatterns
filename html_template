@@ -3,23 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cucumber Report</title>
+    <title>Test Report</title>
 </head>
 <body>
-    {% for test in tests %}
-    <h2>{{ test.name }}</h2>
+    <h1>Test Report</h1>
     <ul>
-        {% for element in test.elements %}
-        <li>
-            <h3>{{ element.name }}</h3>
+        {% for item in data %}
+        <li>Line: {{ item.line }}
             <ul>
-                {% for step in element.steps %}
-                <li>{{ step.name }} - {{ step.result.status }}</li>
+                {% for element in item.elements %}
+                <li>
+                    Element Line: {{ element.line }}
+                    {% if element.name %}
+                    Name: {{ element.name }}
+                    {% endif %}
+                    {% if element.before %}
+                    <ul>
+                        {% for before_item in element.before %}
+                        <li>{{ before_item }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    {% if element.after %}
+                    <ul>
+                        {% for after_item in element.after %}
+                        <li>{{ after_item }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </li>
                 {% endfor %}
             </ul>
         </li>
         {% endfor %}
     </ul>
-    {% endfor %}
 </body>
 </html>
