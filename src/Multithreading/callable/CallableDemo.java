@@ -5,7 +5,7 @@ import java.util.concurrent.*;
 
 
 // if you want call to return another type mention her Callable<Integer>
-public class  CallableDemo implements Callable<String> {
+public class CallableDemo implements Callable<String> {
     String name;
 
     CallableDemo(String name) {
@@ -24,7 +24,7 @@ public class  CallableDemo implements Callable<String> {
     }
 }
 
-class Demo{
+class Demo {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         CallableDemo[] jobs = {new CallableDemo("David"),
                 new CallableDemo("messi"),
@@ -42,11 +42,20 @@ class Demo{
         //a better way to do this
         List<Future<String>> futureList = service.invokeAll(List.of(jobs));
 
-        for(Future<String> future: futureList){
+        for (Future<String> future : futureList) {
             System.out.println("print -> " + future.get());
         }
 
-
         service.shutdown();
+
+
+        // without Executor Framework
+        CallableDemo callableDemo = new CallableDemo("Koko");
+        // Wrap the Callable in a FutureTask
+        FutureTask<String> futureTask = new FutureTask<>(callableDemo);
+        // Create a new thread and start it, passing the FutureTask
+        Thread thread = new Thread(futureTask);
+        thread.start();
+
     }
 }
